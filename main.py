@@ -5,17 +5,17 @@ from robot import Robot
 def main():
     board = Board()
     board.print()
-    robot = Robot()
+    robot = Robot(board)
     print(robot)
-    
+
     # moving tests
-    robot.move("up")
+    robot.move("up", board)
     print(robot)
-    robot.move("up")
+    robot.move("up", board)
     print(robot)
-    robot.move("left")
+    robot.move("left", board)
     print(robot)
-    robot.move("down")
+    robot.move("down", board)
     print(robot)
 
 

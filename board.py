@@ -8,18 +8,35 @@ class Board:
         gold = Gold()
         empty = Empty()
 
-        line = [Cell(empty), Cell(empty), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
+        line = [Cell(empty), Cell(empty), Cell(wumpus), Cell(empty)]
         self.board.append(line)
-        line = [Cell(empty), Cell(empty), Cell(empty), Cell(empty), Cell(wumpus), Cell(gold), Cell(empty), Cell(empty)]
+        line = [Cell(empty), Cell(empty), Cell(gold), Cell(pit)]
         self.board.append(line)
-        line = [Cell(wumpus), Cell(gold), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
+        line = [Cell(pit), Cell(empty), Cell(pit), Cell(empty)]
         self.board.append(line)
-        line = [Cell(empty), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
+        line = [Cell(empty), Cell(empty), Cell(empty), Cell(empty)]
+        self.board.append(line)
+        line = [Cell(empty), Cell(wumpus), Cell(empty), Cell(empty)]
+        self.board.append(line)
+        line = [Cell(empty), Cell(gold), Cell(empty), Cell(empty)]
+        self.board.append(line)
+        line = [Cell(pit), Cell(empty), Cell(pit), Cell(pit)]
+        self.board.append(line)
+        line = [Cell(empty), Cell(empty), Cell(empty), Cell(empty)]
         self.board.append(line)
 
+        # line = [Cell(empty), Cell(empty), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
+        # self.board.append(line)
+        # line = [Cell(empty), Cell(empty), Cell(empty), Cell(empty), Cell(wumpus), Cell(gold), Cell(empty), Cell(empty)]
+        # self.board.append(line)
+        # line = [Cell(wumpus), Cell(gold), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
+        # self.board.append(line)
+        # line = [Cell(empty), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
+        # self.board.append(line)
+
     def print(self):
-        for x in [3, 2, 1, 0]:
-            for y in range(8):
+        for y in [3, 2, 1, 0]:
+            for x in range(8):
                 print(self.board[x][y].content.tag, end="\t")
             print()
         print()
