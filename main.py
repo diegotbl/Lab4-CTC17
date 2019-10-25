@@ -1,5 +1,9 @@
+from board import Board
+
+
 def main():
-    pass
+    board = Board()
+    board.print()
 
 
 if __name__ == "__main__":
