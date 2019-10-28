@@ -25,15 +25,6 @@ class Board:
         line = [Cell(empty), Cell(empty), Cell(empty), Cell(empty)]
         self.board.append(line)
 
-        # line = [Cell(empty), Cell(empty), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
-        # self.board.append(line)
-        # line = [Cell(empty), Cell(empty), Cell(empty), Cell(empty), Cell(wumpus), Cell(gold), Cell(empty), Cell(empty)]
-        # self.board.append(line)
-        # line = [Cell(wumpus), Cell(gold), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
-        # self.board.append(line)
-        # line = [Cell(empty), Cell(pit), Cell(empty), Cell(empty), Cell(empty), Cell(empty), Cell(pit), Cell(empty)]
-        # self.board.append(line)
-
     def print(self):
         for y in [3, 2, 1, 0]:
             for x in range(8):

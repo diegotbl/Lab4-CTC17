@@ -9,13 +9,13 @@ def main():
     print(robot)
 
     # moving tests
-    robot.move("up", board)
+    robot.try_move(0, board)
     print(robot)
-    robot.move("up", board)
+    robot.try_move(0, board)
     print(robot)
-    robot.move("left", board)
+    robot.try_move(3, board)
     print(robot)
-    robot.move("down", board)
+    robot.try_move(2, board)
     print(robot)
 
 
