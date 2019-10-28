@@ -1,5 +1,6 @@
 from board import Board
 from robot import Robot
+from mdp import value_iteration
 
 
 def main():
@@ -8,15 +9,7 @@ def main():
     robot = Robot(board)
     print(robot)
 
-    # moving tests
-    robot.try_move(0, board)
-    print(robot)
-    robot.try_move(0, board)
-    print(robot)
-    robot.try_move(3, board)
-    print(robot)
-    robot.try_move(2, board)
-    print(robot)
+    value_iteration(board, robot)
 
 
 if __name__ == "__main__":

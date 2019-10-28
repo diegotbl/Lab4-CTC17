@@ -5,13 +5,15 @@ class Robot:
     def __init__(self, board):
         self.x = 0
         self.y = 0
-        self.randomize_pos()
+        restarted = True
         self.acc_r = 0
-        self.update_acc_r(board)
+        while restarted is True:
+            restarted = self.restart(board)
 
-    def randomize_pos(self):
+    def randomize_pos(self, board):
         self.x = randint(0, 7)
         self.y = randint(0, 3)
+        self.update_acc_r(board)
 
     def update_pos(self, x, y):
         self.x = x
@@ -25,7 +27,7 @@ class Robot:
                 print("Bump")
             else:
                 self.update_pos(self.x, self.y + 1)
-                self.acc_r += -0.1              # moving cost
+                self.acc_r += -0.1              # movement cost
                 self.update_acc_r(board)        # add reinforcement according to what cell the robot is
                 print()
         elif mov == 1:
@@ -58,8 +60,10 @@ class Robot:
                 self.acc_r += -0.1
                 self.update_acc_r(board)
                 print()
-        else:
-            print("\tError")
+
+        restarted = True
+        while restarted is True:
+            restarted = self.restart(board)             # restarting if necessary
 
     def try_move(self, mov, board):
         """ Moves robot according to it's defects """
@@ -84,7 +88,20 @@ class Robot:
 
     def update_acc_r(self, board):
         """ Looks at the board and updates reinforcement according to where the robot is """
-        self.acc_r += board.board[self.x][self.y].content.r
+        self.acc_r += round(board.board[self.x][self.y].content.r, 1)
+
+    def restart(self, board):
+        """ Decides whether it should be restarted or not and restarts if necessary.
+            Returns True if restarted and False otherwise. """
+        cell_content = board.board[self.x][self.y].content.name
+        if cell_content == "wumpus" or cell_content == "pit" or cell_content == "gold":
+            print("\tRestarting... ", end="")
+            self.randomize_pos(board)
+            self.acc_r += -0.1          # Restart is considered a movement
+            print(self)
+            return True
+        return False
 
     def __str__(self):
-        return "Robot is on (" + str(self.x) + ", " + str(self.y) + "). Accumulated reinforcement: " + str(self.acc_r)
+        r = round(self.acc_r, 1)
+        return "Robot is on (" + str(self.x) + ", " + str(self.y) + "). Accumulated reinforcement: " + str(r)

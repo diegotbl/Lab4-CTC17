@@ -8,22 +8,14 @@ class Board:
         gold = Gold()
         empty = Empty()
 
-        line = [Cell(empty), Cell(empty), Cell(wumpus), Cell(empty)]
-        self.board.append(line)
-        line = [Cell(empty), Cell(empty), Cell(gold), Cell(pit)]
-        self.board.append(line)
-        line = [Cell(pit), Cell(empty), Cell(pit), Cell(empty)]
-        self.board.append(line)
-        line = [Cell(empty), Cell(empty), Cell(empty), Cell(empty)]
-        self.board.append(line)
-        line = [Cell(empty), Cell(wumpus), Cell(empty), Cell(empty)]
-        self.board.append(line)
-        line = [Cell(empty), Cell(gold), Cell(empty), Cell(empty)]
-        self.board.append(line)
-        line = [Cell(pit), Cell(empty), Cell(pit), Cell(pit)]
-        self.board.append(line)
-        line = [Cell(empty), Cell(empty), Cell(empty), Cell(empty)]
-        self.board.append(line)
+        self.board.append([Cell(empty), Cell(empty), Cell(wumpus), Cell(empty)])
+        self.board.append([Cell(empty), Cell(empty), Cell(gold), Cell(pit)])
+        self.board.append([Cell(pit), Cell(empty), Cell(pit), Cell(empty)])
+        self.board.append([Cell(empty), Cell(empty), Cell(empty), Cell(empty)])
+        self.board.append([Cell(empty), Cell(wumpus), Cell(empty), Cell(empty)])
+        self.board.append([Cell(empty), Cell(gold), Cell(empty), Cell(empty)])
+        self.board.append([Cell(pit), Cell(empty), Cell(pit), Cell(pit)])
+        self.board.append([Cell(empty), Cell(empty), Cell(empty), Cell(empty)])
 
     def print(self):
         for y in [3, 2, 1, 0]:
