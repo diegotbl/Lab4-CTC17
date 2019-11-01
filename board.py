@@ -24,10 +24,35 @@ class Board:
             print()
         print()
 
+    def get_value_function(self, x, y):
+        return self.board[x][y].get_value_function()
+
+    def get_tag(self, x, y):
+        return self.board[x][y].get_tag()
+
+    def get_r(self, x, y):
+        return self.board[x][y].get_r()
+
+    def update_value_function(self, x, y, value_function_neighbor):
+        self.board[x][y].update_value_function(value_function_neighbor)
+
 
 class Cell:
     def __init__(self, content):
         self.content = content
+
+    def get_r(self):
+        return self.content.r
+
+    def get_tag(self):
+        return self.content.tag
+
+    def get_value_function(self):
+        return self.content.value_function
+
+    def update_value_function(self, value_function_neighbor):
+        self.content.value_function = max(value_function_neighbor[0], value_function_neighbor[1],
+                                                                value_function_neighbor[2], value_function_neighbor[3])
 
 
 class Wumpus:
@@ -35,6 +60,7 @@ class Wumpus:
         self.name = "wumpus"
         self.r = -100
         self.tag = "W"
+        self.value_function = 0
 
 
 class Pit:
@@ -42,6 +68,7 @@ class Pit:
         self.name = "pit"
         self.r = -50
         self.tag = "P"
+        self.value_function = 0
 
 
 class Gold:
@@ -49,10 +76,12 @@ class Gold:
         self.name = "gold"
         self.r = 100
         self.tag = "G"
+        self.value_function = 0
 
 
 class Empty:
     def __init__(self):
         self.name = "empty"
-        self.r = 0
+        self.r = -0.1
         self.tag = "E"
+        self.value_function = 0

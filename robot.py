@@ -23,47 +23,35 @@ class Robot:
         if mov == 0:
             print("\tMoving up. ", end="")
             if self.y == 3:         # can't go up
-                self.acc_r += -1                # edge collision cost
                 print("Bump")
+                return -1                # edge collision cost
             else:
-                self.update_pos(self.x, self.y + 1)
-                self.acc_r += -0.1              # movement cost
-                self.update_acc_r(board)        # add reinforcement according to what cell the robot is
-                print()
+                return board.get_value_function(self.x, self.y + 1)
         elif mov == 1:
             print("\tMoving right. ", end="")
             if self.x == 7:
-                self.acc_r += -1
                 print("Bump")
+                return -1  # edge collision cost
             else:
-                self.update_pos(self.x + 1, self.y)
-                self.acc_r += -0.1
-                self.update_acc_r(board)
-                print()
+                return board.get_value_function(self.x + 1, self.y)
         elif mov == 2:
             print("\tMoving down. ", end="")
             if self.y == 0:
-                self.acc_r += -1
                 print("Bump")
+                return -1  # edge collision cost
             else:
-                self.update_pos(self.x, self.y - 1)
-                self.acc_r += -0.1
-                self.update_acc_r(board)
-                print()
+                return board.get_value_function(self.x, self.y - 1)
         elif mov == 3:
             print("\tMoving left. ", end="")
             if self.x == 0:
-                self.acc_r += -1
                 print("Bump")
+                return -1  # edge collision cost
             else:
-                self.update_pos(self.x - 1, self.y)
-                self.acc_r += -0.1
-                self.update_acc_r(board)
-                print()
+                return board.get_value_function(self.x - 1, self.y)
 
-        restarted = True
-        while restarted is True:
-            restarted = self.restart(board)             # restarting if necessary
+    def set_position(self, x, y):
+        self.x = x
+        self.y = y
 
     def try_move(self, mov, board):
         """ Moves robot according to it's defects """
@@ -76,15 +64,12 @@ class Robot:
         elif mov == 3:
             print("\tTrying to move left.")
 
-        r = randint(0, 9)               # random number to select action
-        if r in range(0, 2):            # 20% chance of happening. Move to the left of the requested movement
-            mov = (mov + 3) % 4
-            self.move(mov, board)
-        elif r in range(2, 9):          # 70% chance of happening. Make requested movement
-            self.move(mov, board)
-        elif r == 9:                    # 10% chance of happening. Move to the right of the requested movement
-            mov = (mov + 1) % 4
-            self.move(mov, board)
+        expected_reward = 0
+        mov1 = (mov + 3) % 4
+        mov2 = (mov + 1) % 4
+        expected_reward = board.get_r(self.x, self.y) + 0.2*self.move(mov1, board) + 0.7*self.move(mov, board) + 0.1*self.move(mov2, board)
+        return expected_reward
+
 
     def update_acc_r(self, board):
         """ Looks at the board and updates reinforcement according to where the robot is """
