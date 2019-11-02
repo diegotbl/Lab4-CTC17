@@ -1,15 +1,19 @@
 def value_iteration(board, robot):
     moves = [0, 1, 2, 3]
-    gama = 0.7
+    gama = 0.9
+    number_iterations = 500
+    print("Gamma:", gama)
+    print("Number of iterations:", number_iterations)
 
-    for i in range(1000):         # For testing purposes
+    for i in range(1, number_iterations + 1):         # For testing purposes
+        if i % 100 == 0:
+            print(i, "th iteration")
         # board.show_value_function()
         for x in range(8):
             for y in range(4):
                 value_function_neighbor = []
                 # Set the position of the robot
                 robot.update_pos(x, y)
-                print(robot)
                 # Start the value iteration
                 for move in moves:
                     value_function_neighbor.append(robot.try_move(move, board, gama, i))
@@ -19,9 +23,8 @@ def value_iteration(board, robot):
 
 
 def determine_policy(board):
-    for y in range(4):
+    for y in [3, 2, 1, 0]:
         for x in range(8):
-            print("x =", x, "; y =", y, "arrow directions:", end=" ")
             neighbors_values = []
             neighbors = []
             if has_neighbor(x, y, 0):
@@ -36,11 +39,20 @@ def determine_policy(board):
             if has_neighbor(x, y, 3):
                 neighbors_values.append(board.get_value_function(x - 1, y))
                 neighbors.append(3)
-            best_option = min(neighbors_values)
+            best_option = max(neighbors_values)
             for idx, neighbor_value in enumerate(neighbors_values):
                 if neighbor_value == best_option:
-                    print(neighbors[idx], end=" ")
-            print()
+                    arrow = 0
+                    if neighbors[idx] == 0:
+                        arrow = '\u2191'
+                    elif neighbors[idx] == 1:
+                        arrow = '\u2192'
+                    elif neighbors[idx] == 2:
+                        arrow = '\u2193'
+                    elif neighbors[idx] == 3:
+                        arrow = '\u2190'
+                    print(arrow, end="\t")
+        print()
 
 
 def has_neighbor(x, y, direction):
