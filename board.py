@@ -3,24 +3,26 @@ class Board:
         """ Creates the world with wumpus, gold and pits, as displayed on the project's description """
         self.board = []
 
-        wumpus = Wumpus()
-        pit = Pit()
-        gold = Gold()
-        empty = Empty()
-
-        self.board.append([Cell(empty), Cell(empty), Cell(wumpus), Cell(empty)])
-        self.board.append([Cell(empty), Cell(empty), Cell(gold), Cell(pit)])
-        self.board.append([Cell(pit), Cell(empty), Cell(pit), Cell(empty)])
-        self.board.append([Cell(empty), Cell(empty), Cell(empty), Cell(empty)])
-        self.board.append([Cell(empty), Cell(wumpus), Cell(empty), Cell(empty)])
-        self.board.append([Cell(empty), Cell(gold), Cell(empty), Cell(empty)])
-        self.board.append([Cell(pit), Cell(empty), Cell(pit), Cell(pit)])
-        self.board.append([Cell(empty), Cell(empty), Cell(empty), Cell(empty)])
+        self.board.append([Cell(Empty()), Cell(Empty()), Cell(Wumpus()), Cell(Empty())])
+        self.board.append([Cell(Empty()), Cell(Empty()), Cell(Gold()), Cell(Pit())])
+        self.board.append([Cell(Pit()), Cell(Empty()), Cell(Pit()), Cell(Empty())])
+        self.board.append([Cell(Empty()), Cell(Empty()), Cell(Empty()), Cell(Empty())])
+        self.board.append([Cell(Empty()), Cell(Wumpus()), Cell(Empty()), Cell(Empty())])
+        self.board.append([Cell(Empty()), Cell(Gold()), Cell(Empty()), Cell(Empty())])
+        self.board.append([Cell(Pit()), Cell(Empty()), Cell(Pit()), Cell(Pit())])
+        self.board.append([Cell(Empty()), Cell(Empty()), Cell(Empty()), Cell(Empty())])
 
     def print(self):
         for y in [3, 2, 1, 0]:
             for x in range(8):
                 print(self.board[x][y].content.tag, end="\t")
+            print()
+        print()
+
+    def show_value_funtion(self):
+        for y in [3, 2, 1, 0]:
+            for x in range(8):
+                print(self.board[x][y].content.value_function, end="\t")
             print()
         print()
 
@@ -34,6 +36,8 @@ class Board:
         return self.board[x][y].get_r()
 
     def update_value_function(self, x, y, value_function_neighbor):
+        print(value_function_neighbor)
+        print(x, y)
         self.board[x][y].update_value_function(value_function_neighbor)
 
 
@@ -51,8 +55,7 @@ class Cell:
         return self.content.value_function
 
     def update_value_function(self, value_function_neighbor):
-        self.content.value_function = max(value_function_neighbor[0], value_function_neighbor[1],
-                                                                value_function_neighbor[2], value_function_neighbor[3])
+        self.content.value_function = max(value_function_neighbor)
 
 
 class Wumpus:

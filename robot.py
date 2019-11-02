@@ -13,7 +13,7 @@ class Robot:
     def randomize_pos(self, board):
         self.x = randint(0, 7)
         self.y = randint(0, 3)
-        self.update_acc_r(board)
+
 
     def update_pos(self, x, y):
         self.x = x
@@ -49,31 +49,22 @@ class Robot:
             else:
                 return board.get_value_function(self.x - 1, self.y)
 
-    def set_position(self, x, y):
-        self.x = x
-        self.y = y
-
     def try_move(self, mov, board):
         """ Moves robot according to it's defects """
         if mov == 0:
-            print("\tTrying to move up.")
+            print("\nTrying to move up.\n")
         elif mov == 1:
-            print("\tTrying to move right.")
+            print("\nTrying to move right.\n")
         elif mov == 2:
-            print("\tTrying to move down.")
+            print("\nTrying to move down.\n")
         elif mov == 3:
-            print("\tTrying to move left.")
+            print("\nTrying to move left.\n")
 
         expected_reward = 0
         mov1 = (mov + 3) % 4
         mov2 = (mov + 1) % 4
         expected_reward = board.get_r(self.x, self.y) + 0.2*self.move(mov1, board) + 0.7*self.move(mov, board) + 0.1*self.move(mov2, board)
         return expected_reward
-
-
-    def update_acc_r(self, board):
-        """ Looks at the board and updates reinforcement according to where the robot is """
-        self.acc_r += round(board.board[self.x][self.y].content.r, 1)
 
     def restart(self, board):
         """ Decides whether it should be restarted or not and restarts if necessary.

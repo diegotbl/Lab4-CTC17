@@ -7,7 +7,6 @@ def main():
     board = Board()
     board.print()
     robot = Robot(board)
-    print(robot)
 
     value_iteration(board, robot)
 
