@@ -36,8 +36,8 @@ class Board:
         return self.board[x][y].get_r()
 
     def update_value_function(self, x, y, value_function_neighbor):
-        print(value_function_neighbor)
-        print(x, y)
+        # print(value_function_neighbor)
+        # print(x, y)
         self.board[x][y].update_value_function(value_function_neighbor)
 
 
