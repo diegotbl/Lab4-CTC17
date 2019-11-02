@@ -19,7 +19,7 @@ class Board:
             print()
         print()
 
-    def show_value_funtion(self):
+    def show_value_function(self):
         for y in [3, 2, 1, 0]:
             for x in range(8):
                 print(self.board[x][y].content.value_function, end="\t")

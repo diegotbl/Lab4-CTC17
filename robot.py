@@ -1,6 +1,7 @@
 from random import randint
 from math import pow
 
+
 class Robot:
     def __init__(self, board):
         self.x = 0
@@ -10,10 +11,9 @@ class Robot:
         while restarted is True:
             restarted = self.restart(board)
 
-    def randomize_pos(self, board):
+    def randomize_pos(self):
         self.x = randint(0, 7)
         self.y = randint(0, 3)
-
 
     def update_pos(self, x, y):
         self.x = x
