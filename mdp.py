@@ -2,7 +2,7 @@ def value_iteration(board, robot):
     moves = [0, 1, 2, 3]
     gama = 0.7
     # while True:
-    for i in range(10):         # For testing purposes
+    for i in range(200):         # For testing purposes
         #board.show_value_funtion()
         for x in range(8):
             for y in range(4):

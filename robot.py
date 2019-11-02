@@ -63,7 +63,7 @@ class Robot:
         expected_reward = 0
         mov1 = (mov + 3) % 4
         mov2 = (mov + 1) % 4
-        expected_reward = board.get_r(self.x, self.y) + (pow(gama, time))*(0.2*self.move(mov1, board) + 0.7*self.move(mov, board) + 0.1*self.move(mov2, board))
+        expected_reward = board.get_r(self.x, self.y) + gama*(0.2*self.move(mov1, board) + 0.7*self.move(mov, board) + 0.1*self.move(mov2, board))
         return expected_reward
 
     def restart(self, board):
